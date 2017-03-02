@@ -26,18 +26,34 @@ class Grid {
     this.grid[tile.row][tile.col] = tile;
   }
 
-  eachTile(callback) {
-    this.tiles().forEach((tile) => {
-      callback(tile);
-    })
+  eachPos(callback) {
+    this.grid.forEach((row, x) => {
+      row.forEach((tile, y) => {
+        callback(tile, x, y);
+      });
+    });
   }
 
-  eachPos(callback) {
-    this.grid.forEach((row) => {
+  // if down, it should iterate grid backwards
+  eachPosDown(callback) {
+    for (let i = 3; i >= 0; i--) {
+      let row = this.grid[i];
       row.forEach((tile) => {
         callback(tile);
       });
+    }
+
+  }
+
+  // if right, it should iterate rows backwards
+  eachPosRight(callback) {
+    this.grid.forEach((row) => {
+      for (let i = 3; i >= 0; i--) {
+        let tile = row[i];
+        callback(tile);
+      }
     });
+
   }
 
   tiles() {
@@ -85,17 +101,56 @@ class Grid {
     return (this.grid[row][col].value === tile.value);
   }
 
+  rotate90DegreesClockwise() {
+    const rotated = this.emptyGrid();
+    this.grid.forEach((row, x) => {
+      row.forEach((tile, y) => {
+        rotated[y][3 - x] = tile;
+      });
+    });
+    this.grid = rotated;
+  }
+
+  updateTilePositions() {
+    this.eachPos((tile, x, y) => {
+      tile.updatePos([x, y]);
+    });
+  }
+
   move(vector) {
     const dx = vector[0];
     const dy = vector[1];
-    this.eachPos((tile) => {
+
+    let enumerator;
+    if (dx === 1) {
+      // if down, it should iterate backwards
+      enumerator = this.eachPosDown.bind(this);
+    } else if (dy === 1 ) {
+      // if right, it should iterate rows backwards
+      enumerator = this.eachPosRight.bind(this);
+    } else {
+      // if up or left, normal iteration
+      enumerator = this.eachPos.bind(this);
+    }
+
+    enumerator((tile) => {
       if (tile) {
+        debugger
         while(this.inBounds([tile.row + dx, tile.col + dy])) {
+          debugger
           if (this.empty([tile.row + dx, tile.col + dy])) {
+            debugger
             this.grid[tile.row][tile.col] = null;
-            tile.update([tile.row + dx, tile.col + dy]);
+            tile.updatePos([tile.row + dx, tile.col + dy]);
+            this.grid[tile.row][tile.col] = tile;
+          } else if (this.equalValue([tile.row + dx, tile.col + dy], tile)) {
+            debugger
+            this.grid[tile.row][tile.col] = null;
+            tile.updatePos([tile.row + dx, tile.col + dy]);
+            tile.updateVal(tile.value * 2);
             this.grid[tile.row][tile.col] = tile;
           } else {
+            debugger
             break;
           }
         }

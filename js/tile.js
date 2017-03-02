@@ -5,9 +5,13 @@ class Tile {
     this.value = value;
   }
 
-  update(pos) {
+  updatePos(pos) {
     this.row = pos[0];
     this.col = pos[1]
+  }
+
+  updateVal(value){
+    this.value = value;
   }
 }
 
