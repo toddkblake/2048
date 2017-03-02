@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>2048</title>
+    <script type="application/javascript" src="js/bundle.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="css/game.css">
+  </head>
+  <body>
+    <div class="game-container">
+      <header>
+        <section class="top-row group">
+          <h1>2048</h1>
+          <ul class="score-row group">
+            <li class="score">
+              <h3>Score</h3>
+              <h2 class="current-score">0</h2>
+            </li>
+            <li class="best">
+              <h3>Best</h3>
+              <h2 class="best-score">0</h2>
+            </li>
+          </ul>
+        </section>
+        <section class="bottom-row group">
+          <p>
+            Join the numbers and get to the <strong>2048 tile!</strong>
+          </p>
+          <button type="button">New Game</button>
+        </section>
+      </header>
+
+      <div id="grid" >
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+        <div class="row">
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+          <div class="col"></div>
+        </div>
+      </div>
+
+      <footer>
+        <section class="instructions">
+          <p>
+            <strong>HOW TO PLAY:</strong>
+            Use your <strong>arrow keys</strong> to move the tiles.
+            When two tiles with the same number touch, they <strong>merge into one!</strong>
+          </p>
+        </section>
+        <section>
+          <p>Created by <a href="http://toddkblake.com/">Todd Blake</a>. Based on <a href="https://gabrielecirulli.github.io/2048/">2048</a> by Gabriele Cirulli.</p>
+        </section>
+        <section>
+          <nav class="group">
+            <a href="https://github.com/toddkblake/">Github</a>
+            <a href="https://www.linkedin.com/in/toddkblake/">LinkedIn</a>
+            <a href="https://angel.co/toddkblake">AngelList</a>
+            <a href="http://toddkblake.com/">Portfolio</a>
+          </nav>
+        </section>
+      </footer>
+    </div>
+  </body>
+</html>
