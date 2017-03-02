@@ -16,13 +16,52 @@ class Grid {
   }
 
   getTile(pos) {
+    let row;
+    let col;
     [row, col] = pos;
     return this.grid[row][col];
   }
 
-  setTile(pos, tile) {
-    [row, col] = pos;
+  setTile(tile) {
+    let row;
+    let col;
+    [row, col] = tile.pos;
     this.grid[row][col] = tile;
+  }
+
+  eachTile(callback) {
+    this.grid.forEach((row) => {
+      row.forEach((tile) => {
+        callback(tile);
+      });
+    });
+  }
+
+  tiles() {
+    const tiles = [];
+    this.eachTile((tile) => {
+      if (tile) {
+        tiles.push(tile);
+      }
+    });
+    return tiles;
+  }
+
+  emptyPositions() {
+    const emptyPositions = [];
+    this.grid.forEach((row, rowIdx) => {
+      row.forEach((tile, colIdx) => {
+        if (!tile) {
+          emptyPositions.push([rowIdx, colIdx]);
+        }
+      });
+    });
+    return emptyPositions;
+  }
+
+  randomEmptyPosition() {
+    const emptyPositions = this.emptyPositions();
+    return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
   }
 }
 

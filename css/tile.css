@@ -1,0 +1,146 @@
+/* TILES */
+
+.tile {
+  position: absolute;
+  width: 106.25px;
+  height: 106.25px;
+  padding: 15px;
+  margin-right: 15px;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.tile > span {
+  margin: 0 auto;
+  font-size: 3em;
+
+  font-weight: 700;
+}
+
+/* POSITIONS */
+
+.pos-0-0 {
+  top: 15px;
+  left: 15px;
+}
+
+.pos-0-1 {
+  top: 15px;
+  left: 136.25px;
+}
+
+.pos-0-2 {
+  top: 15px;
+  left: 257.5px;
+}
+
+.pos-0-3 {
+  top: 15px;
+  left: 378.75px;
+}
+
+.pos-1-0 {
+  top: 136.25px;
+  left: 15px;
+}
+
+.pos-1-1 {
+  top: 136.25px;
+  left: 136.25px;
+}
+
+.pos-1-2 {
+  top: 136.25px;
+  left: 257.5px;
+}
+
+.pos-1-3 {
+  top: 136.25px;
+  left: 378.75px;
+}
+
+.pos-2-0 {
+  top: 257.5px;
+  left: 15px;
+}
+
+.pos-2-1 {
+  top: 257.5px;
+  left: 136.25px;
+}
+
+.pos-2-2 {
+  top: 257.5px;
+  left: 257.5px;
+}
+
+.pos-2-3 {
+  top: 257.5px;
+  left: 378.75px;
+}
+
+.pos-3-0 {
+  top: 378.75px;
+  left: 15px;
+}
+
+.pos-3-1 {
+  top: 378.75px;
+  left: 136.25px;
+}
+
+.pos-3-2 {
+  top: 378.75px;
+  left: 257.5px;
+}
+
+.pos-3-3 {
+  top: 378.75px;
+  left: 378.75px;
+}
+
+/* VALUES */
+
+.value-2 {
+  background-color: #EEE4DA;
+}
+
+.value-4 {
+  background-color: #EDE0C8;
+}
+
+.value-8 {
+
+}
+
+.value-16 {
+
+}
+
+.value-32 {
+
+}
+
+.value-64 {
+
+}
+
+.value-128 {
+
+}
+
+.value-256 {
+
+}
+
+.value-512 {
+
+}
+
+.value-1024 {
+
+}
+
+.value-2048 {
+
+}
