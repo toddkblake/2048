@@ -23,13 +23,16 @@ class Grid {
   }
 
   setTile(tile) {
-    let row;
-    let col;
-    [row, col] = tile.pos;
-    this.grid[row][col] = tile;
+    this.grid[tile.row][tile.col] = tile;
   }
 
   eachTile(callback) {
+    this.tiles().forEach((tile) => {
+      callback(tile);
+    })
+  }
+
+  eachPos(callback) {
     this.grid.forEach((row) => {
       row.forEach((tile) => {
         callback(tile);
@@ -39,7 +42,7 @@ class Grid {
 
   tiles() {
     const tiles = [];
-    this.eachTile((tile) => {
+    this.eachPos((tile) => {
       if (tile) {
         tiles.push(tile);
       }
@@ -62,6 +65,46 @@ class Grid {
   randomEmptyPosition() {
     const emptyPositions = this.emptyPositions();
     return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
+  }
+
+  inBounds(pos) {
+    let row = pos[0];
+    let col = pos[1];
+    return (row >= 0 && row < 4 && col >= 0 && col < 4);
+  }
+
+  empty(pos) {
+    let row = pos[0];
+    let col = pos[1];
+    return (this.grid[row][col] === null);
+  }
+
+  equalValue(pos, tile) {
+    let row = pos[0];
+    let col = pos[1];
+    return (this.grid[row][col].value === tile.value);
+  }
+
+  move(vector) {
+    const dx = vector[0];
+    const dy = vector[1];
+    this.eachPos((tile) => {
+      if (tile) {
+        while(this.inBounds([tile.row + dx, tile.col + dy])) {
+          if (this.empty([tile.row + dx, tile.col + dy])) {
+            this.grid[tile.row][tile.col] = null;
+            tile.update([tile.row + dx, tile.col + dy]);
+            this.grid[tile.row][tile.col] = tile;
+          } else {
+            break;
+          }
+        }
+      }
+    });
+  }
+
+  availableMerges() {
+
   }
 }
 

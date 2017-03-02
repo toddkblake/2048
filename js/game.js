@@ -2,11 +2,17 @@ import Grid from './grid';
 import Tile from './tile';
 
 class Game {
-  constructor() {
+  constructor(bestScore) {
     this.score = 0;
+    this.bestScore = bestScore;
     this.grid = new Grid;
-    this.placeRandomTile();
-    this.placeRandomTile();
+    this.newGame();
+  }
+
+  newGame() {
+    for (let i = 0; i < 2; i++) {
+      this.placeRandomTile();
+    }
   }
 
   placeRandomTile() {
@@ -17,8 +23,38 @@ class Game {
   }
 
   randomValue() {
-    return [2, 2, 2, 4][Math.floor(Math.random() * 4)]
+    return [2, 2, 2, 2, 4][Math.floor(Math.random() * 5)]
   }
+
+  move(dir) {
+    const vector = this.vector(dir);
+    this.grid.move(vector);
+    this.placeRandomTile();
+  }
+
+  vector(dir) {
+    const VECTORS = {
+      'up': [-1, 0],
+      'down': [1, 0],
+      'left': [0, -1],
+      'right': [0, 1]
+    }
+
+    return VECTORS[dir];
+  }
+
+  availableMove() {
+    return (emptyPositions.length || availableMerges.length);
+  }
+
+  emptyPositions() {
+    return this.grid.emptyPositions();
+  }
+
+  availableMerges() {
+    return this.grid.availableMerges();
+  }
+
 }
 
 export default Game;

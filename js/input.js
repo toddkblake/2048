@@ -1,4 +1,6 @@
 document.addEventListener('keydown', event => {
+  event.preventDefault();
+
   switch (event.key) {
     case 'ArrowUp': {
 
@@ -10,7 +12,7 @@ document.addEventListener('keydown', event => {
 
     }
     case 'ArrowDown': {
-      
+
     }
   }
 });

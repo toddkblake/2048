@@ -1,19 +1,13 @@
 class Tile {
   constructor(pos, value) {
-    this.pos = pos;
+    this.row = pos[0];
+    this.col = pos[1];
     this.value = value;
   }
 
-  updateTile(pos) {
-    this.pos = pos;
-  }
-
-  row() {
-    return this.pos[0];
-  }
-
-  col() {
-    return this.pos[1];
+  update(pos) {
+    this.row = pos[0];
+    this.col = pos[1]
   }
 }
 

@@ -26,6 +26,11 @@ h1, h2, h3, h4, h5, h6, p, a {
   clear: both;
 }
 
+.main-content {
+  width: 500px;
+  margin: 90px auto;
+}
+
 body {
   color: #776E65;
   background-color: #FAF8EF;
@@ -68,7 +73,7 @@ button {
 
 .game-container {
   width: 500px;
-  margin: 90px auto;
+  margin: 0 auto;
 }
 
 header {
@@ -147,7 +152,7 @@ header .bottom-row {
   margin-right: 0;
 }
 
-#game {
+.tiles {
   position: relative;
 }
 
