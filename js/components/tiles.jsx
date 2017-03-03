@@ -5,7 +5,7 @@ const Tiles = ({ game }) => {
   return (
     <div className="tiles">
       {
-        game.grid.tiles().map((tile, idx) => <Tile tile={ tile } key={ idx } />)
+        game.grid.tiles().map((tile, idx) => <Tile tile={ tile } key={ tile.id } />)
       }
     </div>
   );

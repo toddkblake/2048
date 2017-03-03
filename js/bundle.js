@@ -10294,7 +10294,7 @@ var Tiles = function Tiles(_ref) {
     'div',
     { className: 'tiles' },
     game.grid.tiles().map(function (tile, idx) {
-      return _react2.default.createElement(_tile2.default, { tile: tile, key: idx });
+      return _react2.default.createElement(_tile2.default, { tile: tile, key: tile.id });
     })
   );
 };
@@ -10662,6 +10662,8 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+var id = 0;
+
 var Tile = function () {
   function Tile(pos, value) {
     _classCallCheck(this, Tile);
@@ -10669,6 +10671,7 @@ var Tile = function () {
     this.row = pos[0];
     this.col = pos[1];
     this.value = value;
+    this.id = id++;
   }
 
   _createClass(Tile, [{
