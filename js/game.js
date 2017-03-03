@@ -18,8 +18,10 @@ class Game {
   placeRandomTile() {
     const pos = this.grid.randomEmptyPosition();
     const value = this.randomValue();
-    const tile = new Tile(pos, value);
-    this.grid.setTile(tile);
+    if (pos) {
+      const tile = new Tile(pos, value);
+      this.grid.setTile(tile);
+    }
   }
 
   randomValue() {
@@ -43,8 +45,12 @@ class Game {
     return VECTORS[dir];
   }
 
+  over() {
+    return this.availableMove() ? false : true;
+  }
+
   availableMove() {
-    return (emptyPositions.length || availableMerges.length);
+    return (this.emptyPositions().length || this.availableMerges());
   }
 
   emptyPositions() {
@@ -54,7 +60,6 @@ class Game {
   availableMerges() {
     return this.grid.availableMerges();
   }
-
 }
 
 export default Game;

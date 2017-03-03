@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Modal from 'react-modal';
 import Game from './game';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -10,7 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
 class GameContainer extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { game: new Game(0) }
+    this.state = {
+      game: new Game(0),
+      modalIsOpen: false
+    }
+  }
+
+  componentWillMount() {
+    Modal.setAppElement(document.getElementById('game'));
   }
 
   componentDidMount() {
@@ -42,7 +50,11 @@ class GameContainer extends React.Component {
   }
 
   updateGame(game) {
-    this.setState({ game });
+    if (game.over()) {
+      this.setState({ modalIsOpen: true });
+    } else {
+      this.setState({ game });
+    }
   }
 
   resetGame() {
@@ -52,12 +64,39 @@ class GameContainer extends React.Component {
     } else {
       game = new Game(this.state.game.bestScore);
     }
-    this.setState({ game });
+    this.setState({ game, modalIsOpen: false });
+  }
+
+  getParent () {
+    return document.querySelector('.tiles');
   }
 
   render () {
     return (
       <div className="game-container">
+        <Modal
+          isOpen={ this.state.modalIsOpen }
+          contentLabel="Modal"
+          className="modal-content"
+          overlayClassName="modal-overlay"
+          parentSelector={ this.getParent }
+        >
+          <h1>Game over!</h1>
+          <button onClick={ this.resetGame.bind(this) }>Try again</button>
+          <nav>
+            <ul className="links">
+              <li>
+                <a href="https://github.com/toddkblake/"><i className="fa fa-github fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/toddkblake/"><i className="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
+              </li>
+              <li>
+                <a href="http://toddkblake.com/"><i className="fa fa-folder-o fa-2x" aria-hidden="true"></i></a>
+              </li>
+            </ul>
+          </nav>
+        </Modal>
         <Header game={ this.state.game } resetGame={ this.resetGame.bind(this) } />
         <Tiles game={ this.state.game } />
       </div>

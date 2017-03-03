@@ -159,7 +159,39 @@ class Grid {
   }
 
   availableMerges() {
+    let availableMerges = false;
+    this.eachPos((tile)=> {
+      if (this.neighboringMerge(tile)) {
+        availableMerges = true;
+      }
+    });
+    return availableMerges;
+  }
 
+  neighboringMerge(tile) {
+    let neighboringMerge = false;
+
+    const deltas = [
+      [-1, 0],
+      [1, 0],
+      [0, -1],
+      [0, 1]
+    ]
+
+    deltas.forEach((delta) => {
+      let dx = delta[0];
+      let dy = delta[1];
+
+      if (this.inBounds([tile.row + dx, tile.col + dy])) {
+        const neighboringTile = this.grid[tile.row + dx][tile.col + dy];
+        if (neighboringTile.value === tile.value) {
+          neighboringMerge = true;
+        }
+      }
+
+    });
+
+    return neighboringMerge;
   }
 }
 
