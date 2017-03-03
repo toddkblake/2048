@@ -28,7 +28,7 @@ class Game {
 
   move(dir) {
     const vector = this.vector(dir);
-    this.grid.move(vector);
+    this.score += this.grid.move(vector);
     this.placeRandomTile();
   }
 

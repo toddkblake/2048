@@ -133,6 +133,8 @@ class Grid {
       enumerator = this.eachPos.bind(this);
     }
 
+    let movePoints = 0;
+
     enumerator((tile) => {
       if (tile) {
         while(this.inBounds([tile.row + dx, tile.col + dy])) {
@@ -144,6 +146,7 @@ class Grid {
             this.grid[tile.row][tile.col] = null;
             tile.updatePos([tile.row + dx, tile.col + dy]);
             tile.updateVal(tile.value * 2);
+            movePoints += tile.value;
             this.grid[tile.row][tile.col] = tile;
             break;
           } else {
@@ -152,6 +155,7 @@ class Grid {
         }
       }
     });
+    return movePoints;
   }
 
   availableMerges() {
