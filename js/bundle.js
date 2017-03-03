@@ -12411,9 +12411,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var Tile = function Tile(_ref) {
   var tile = _ref.tile;
+
+  var merged = tile.merged ? 'merged' : '';
   return _react2.default.createElement(
     'div',
-    { className: 'tile pos-' + tile.row + '-' + tile.col + ' value-' + tile.value },
+    { className: 'tile pos-' + tile.row + '-' + tile.col + ' value-' + tile.value + ' ' + merged },
     _react2.default.createElement(
       'span',
       null,
@@ -12596,6 +12598,7 @@ var Grid = function () {
 
       enumerator(function (tile) {
         if (tile) {
+          tile.merged = false;
           while (_this.inBounds([tile.row + dx, tile.col + dy])) {
             if (_this.empty([tile.row + dx, tile.col + dy])) {
               _this.grid[tile.row][tile.col] = null;
@@ -12605,6 +12608,7 @@ var Grid = function () {
               _this.grid[tile.row][tile.col] = null;
               tile.updatePos([tile.row + dx, tile.col + dy]);
               tile.updateVal(tile.value * 2);
+              tile.merged = true;
               movePoints += tile.value;
               _this.grid[tile.row][tile.col] = tile;
               break;
@@ -12683,6 +12687,7 @@ var Tile = function () {
     this.row = pos[0];
     this.col = pos[1];
     this.value = value;
+    this.merged = false;
     this.id = id++;
   }
 

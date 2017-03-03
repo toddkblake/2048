@@ -5,6 +5,7 @@ class Tile {
     this.row = pos[0];
     this.col = pos[1];
     this.value = value;
+    this.merged = false;
     this.id = id++
   }
 

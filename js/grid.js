@@ -127,6 +127,7 @@ class Grid {
 
     enumerator((tile) => {
       if (tile) {
+        tile.merged = false;
         while(this.inBounds([tile.row + dx, tile.col + dy])) {
           if (this.empty([tile.row + dx, tile.col + dy])) {
             this.grid[tile.row][tile.col] = null;
@@ -136,6 +137,7 @@ class Grid {
             this.grid[tile.row][tile.col] = null;
             tile.updatePos([tile.row + dx, tile.col + dy]);
             tile.updateVal(tile.value * 2);
+            tile.merged = true;
             movePoints += tile.value;
             this.grid[tile.row][tile.col] = tile;
             break;
