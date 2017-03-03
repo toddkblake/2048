@@ -135,22 +135,18 @@ class Grid {
 
     enumerator((tile) => {
       if (tile) {
-        debugger
         while(this.inBounds([tile.row + dx, tile.col + dy])) {
-          debugger
           if (this.empty([tile.row + dx, tile.col + dy])) {
-            debugger
             this.grid[tile.row][tile.col] = null;
             tile.updatePos([tile.row + dx, tile.col + dy]);
             this.grid[tile.row][tile.col] = tile;
           } else if (this.equalValue([tile.row + dx, tile.col + dy], tile)) {
-            debugger
             this.grid[tile.row][tile.col] = null;
             tile.updatePos([tile.row + dx, tile.col + dy]);
             tile.updateVal(tile.value * 2);
             this.grid[tile.row][tile.col] = tile;
+            break;
           } else {
-            debugger
             break;
           }
         }
