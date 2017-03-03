@@ -101,16 +101,6 @@ class Grid {
     return (this.grid[row][col].value === tile.value);
   }
 
-  rotate90DegreesClockwise() {
-    const rotated = this.emptyGrid();
-    this.grid.forEach((row, x) => {
-      row.forEach((tile, y) => {
-        rotated[y][3 - x] = tile;
-      });
-    });
-    this.grid = rotated;
-  }
-
   updateTilePositions() {
     this.eachPos((tile, x, y) => {
       tile.updatePos([x, y]);

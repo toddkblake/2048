@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import Header from './components/header';
+import Tiles from './components/tiles';
 import Game from './game';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -103,45 +105,3 @@ class GameContainer extends React.Component {
     );
   }
 }
-
-const Header = ({ resetGame, game }) => {
-  return (
-    <header>
-      <section className="top-row group">
-        <h1>2048</h1>
-        <ul className="score-row group">
-          <li className="score">
-            <h3>Score</h3>
-            <h2 className="current-score">{ game.score }</h2>
-          </li>
-          <li className="best">
-            <h3>Best</h3>
-            <h2 className="best-score">{ game.bestScore }</h2>
-          </li>
-        </ul>
-      </section>
-      <section className="bottom-row group">
-        <p>
-          Join the numbers and get to the <strong>2048 tile!</strong>
-        </p>
-        <button type="button" onClick={ resetGame }>New Game</button>
-      </section>
-    </header>
-  );
-}
-
-const Tiles = ({ game }) => {
-  return (
-    <div className="tiles">
-      {
-        game.grid.tiles().map((tile, idx) => <Tile tile={ tile } key={ idx } />)
-      }
-    </div>
-  );
-}
-
-const Tile = ({ tile }) => (
-  <div className={ `tile pos-${tile.row}-${tile.col} value-${tile.value}` }>
-    <span>{ tile.value }</span>
-  </div>
-);
