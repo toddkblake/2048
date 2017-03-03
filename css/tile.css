@@ -4,7 +4,7 @@
   position: absolute;
   width: 106.25px;
   height: 106.25px;
-  padding: 15px;
+  padding: 15px 0;
   margin-right: 15px;
   border-radius: 3px;
   text-align: center;
@@ -13,7 +13,6 @@
 .tile > span {
   margin: 0 auto;
   font-size: 3em;
-
   font-weight: 700;
 }
 
@@ -110,37 +109,48 @@
 }
 
 .value-8 {
-
+  color: #FFF;
+  background-color: #F2B179;
 }
 
 .value-16 {
-
+  color: #FFF;
+  background-color: #F59563;
 }
 
 .value-32 {
-
+  color: #FFF;
+  background-color: #F67C5F;
 }
 
 .value-64 {
-
+  color: #FFF;
+  background-color: #F65E3B;
 }
 
 .value-128 {
-
+  color: #FFF;
+  background-color: #EDCF72;
 }
 
 .value-256 {
-
+  color: #FFF;
+  background-color: #EDCC61;
 }
 
 .value-512 {
-
+  color: #FFF;
+  background-color: #EDC850;
 }
 
 .value-1024 {
-
+  font-size: 2em;
+  color: #FFF;
+  background-color: #EDC53F;
 }
 
 .value-2048 {
-
+  font-size: 2em;
+  color: #FFF;
+  background-color: #EDC22E;
 }
