@@ -12599,12 +12599,17 @@ var Grid = function () {
       enumerator(function (tile) {
         if (tile) {
           tile.merged = false;
+        }
+      });
+
+      enumerator(function (tile) {
+        if (tile) {
           while (_this.inBounds([tile.row + dx, tile.col + dy])) {
             if (_this.empty([tile.row + dx, tile.col + dy])) {
               _this.grid[tile.row][tile.col] = null;
               tile.updatePos([tile.row + dx, tile.col + dy]);
               _this.grid[tile.row][tile.col] = tile;
-            } else if (_this.equalValue([tile.row + dx, tile.col + dy], tile)) {
+            } else if (_this.equalValue([tile.row + dx, tile.col + dy], tile) && !_this.grid[tile.row + dx][tile.col + dy].merged) {
               _this.grid[tile.row][tile.col] = null;
               tile.updatePos([tile.row + dx, tile.col + dy]);
               tile.updateVal(tile.value * 2);
