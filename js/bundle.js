@@ -25772,6 +25772,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 document.addEventListener('DOMContentLoaded', function () {
   var game = document.getElementById('game');
   _reactDom2.default.render(_react2.default.createElement(GameContainer, null), game);
+
+  var toggle = document.getElementById('toggle');
+  toggle.addEventListener('click', function () {
+    var html = document.getElementsByTagName('html')[0];
+    html.classList.toggle('dark');
+  });
 });
 
 var GameContainer = function (_React$Component) {

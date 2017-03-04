@@ -192,3 +192,49 @@
   50%   { transform: scale(1.2, 1.2) }
   100%  { transform: scale(1, 1) }
 }
+
+/* DARK MODE */
+
+.dark .value-2 {
+  background-color: #F4BF75;
+}
+
+.dark .value-4 {
+  background-color: #E06C6E;
+}
+
+.dark .value-8 {
+  background-color: #3E8CCA;
+}
+
+.dark .value-16 {
+  background-color: #91c36e;
+}
+
+.dark .value-32 {
+  background-color: #bb74d0;
+}
+
+.dark .value-64 {
+  background-color: #0abfa2;
+}
+
+.dark .value-128 {
+  background-color: #f77046;
+}
+
+.dark .value-256{
+  background-color: #b33c66;
+}
+
+.dark .value-512 {
+  background-color: #763fd6;
+}
+
+.dark .value-1024 {
+  background-color: #00B16A;
+}
+
+.dark .value-2048 {
+  background-color: #f7d66b;
+}

@@ -8,6 +8,12 @@ import Game from './game';
 document.addEventListener('DOMContentLoaded', () => {
   const game = document.getElementById('game');
   ReactDOM.render(<GameContainer/>, game);
+
+  const toggle = document.getElementById('toggle');
+  toggle.addEventListener('click', () => {
+    const html = document.getElementsByTagName('html')[0];
+    html.classList.toggle('dark');
+  });
 });
 
 class GameContainer extends React.Component {
