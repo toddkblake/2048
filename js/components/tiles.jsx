@@ -7,14 +7,6 @@ class Tiles extends React.Component {
     super(props);
   }
 
-  handleAdd() {
-
-  }
-
-  handleRemove() {
-
-  }
-
   render() {
     const { game } = this.props;
     return (

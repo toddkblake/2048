@@ -12248,12 +12248,6 @@ var Tiles = function (_React$Component) {
   }
 
   _createClass(Tiles, [{
-    key: 'handleAdd',
-    value: function handleAdd() {}
-  }, {
-    key: 'handleRemove',
-    value: function handleRemove() {}
-  }, {
     key: 'render',
     value: function render() {
       var game = this.props.game;
