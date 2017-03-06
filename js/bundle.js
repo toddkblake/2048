@@ -11710,21 +11710,17 @@ var Game = function () {
   }, {
     key: 'move',
     value: function move(dir) {
-      var vector = this.vector(dir);
-      this.score += this.grid.move(vector);
+      this.grid.move(dir);
+      this.updateScore();
       this.placeRandomTile();
     }
   }, {
-    key: 'vector',
-    value: function vector(dir) {
-      var VECTORS = {
-        'up': [-1, 0],
-        'down': [1, 0],
-        'left': [0, -1],
-        'right': [0, 1]
-      };
-
-      return VECTORS[dir];
+    key: 'updateScore',
+    value: function updateScore() {
+      this.score += this.grid.movePoints;
+      if (this.score > this.bestScore) {
+        this.bestScore = this.score;
+      }
     }
   }, {
     key: 'over',
@@ -11819,10 +11815,17 @@ var Grid = function () {
     _classCallCheck(this, Grid);
 
     this.grid = this.emptyGrid();
+    this.movePoints = 0;
+    this.vectors = {
+      'up': [-1, 0],
+      'down': [1, 0],
+      'left': [0, -1],
+      'right': [0, 1]
+    };
   }
 
   _createClass(Grid, [{
-    key: "emptyGrid",
+    key: 'emptyGrid',
     value: function emptyGrid() {
       var grid = [];
       for (var i = 0; i < 4; i++) {
@@ -11835,7 +11838,7 @@ var Grid = function () {
       return grid;
     }
   }, {
-    key: "getTile",
+    key: 'getTile',
     value: function getTile(pos) {
       var row = void 0;
       var col = void 0;
@@ -11848,12 +11851,12 @@ var Grid = function () {
       return this.grid[row][col];
     }
   }, {
-    key: "setTile",
+    key: 'setTile',
     value: function setTile(tile) {
       this.grid[tile.row][tile.col] = tile;
     }
   }, {
-    key: "eachPos",
+    key: 'eachPos',
     value: function eachPos(callback) {
       this.grid.forEach(function (row, x) {
         row.forEach(function (tile, y) {
@@ -11862,10 +11865,10 @@ var Grid = function () {
       });
     }
 
-    // if down, it should iterate grid backwards
+    // if direction is down, it should iterate grid backwards
 
   }, {
-    key: "eachPosDown",
+    key: 'eachPosDown',
     value: function eachPosDown(callback) {
       for (var i = 3; i >= 0; i--) {
         var row = this.grid[i];
@@ -11875,10 +11878,10 @@ var Grid = function () {
       }
     }
 
-    // if right, it should iterate rows backwards
+    // if direction is right, it should iterate rows backwards
 
   }, {
-    key: "eachPosRight",
+    key: 'eachPosRight',
     value: function eachPosRight(callback) {
       this.grid.forEach(function (row) {
         for (var i = 3; i >= 0; i--) {
@@ -11888,7 +11891,7 @@ var Grid = function () {
       });
     }
   }, {
-    key: "tiles",
+    key: 'tiles',
     value: function tiles() {
       var tiles = [];
       this.eachPos(function (tile) {
@@ -11899,7 +11902,7 @@ var Grid = function () {
       return tiles;
     }
   }, {
-    key: "emptyPositions",
+    key: 'emptyPositions',
     value: function emptyPositions() {
       var emptyPositions = [];
       this.grid.forEach(function (row, rowIdx) {
@@ -11912,81 +11915,98 @@ var Grid = function () {
       return emptyPositions;
     }
   }, {
-    key: "randomEmptyPosition",
+    key: 'randomEmptyPosition',
     value: function randomEmptyPosition() {
       var emptyPositions = this.emptyPositions();
       return emptyPositions[Math.floor(Math.random() * emptyPositions.length)];
     }
   }, {
-    key: "inBounds",
+    key: 'inBounds',
     value: function inBounds(pos) {
       var row = pos[0];
       var col = pos[1];
       return row >= 0 && row < 4 && col >= 0 && col < 4;
     }
   }, {
-    key: "empty",
+    key: 'empty',
     value: function empty(pos) {
       var row = pos[0];
       var col = pos[1];
       return this.grid[row][col] === null;
     }
   }, {
-    key: "equalValue",
+    key: 'equalValue',
     value: function equalValue(pos, tile) {
       var row = pos[0];
       var col = pos[1];
       return this.grid[row][col].value === tile.value;
     }
   }, {
-    key: "updateTilePositions",
+    key: 'updateTilePositions',
     value: function updateTilePositions() {
       this.eachPos(function (tile, x, y) {
         tile.updatePos([x, y]);
       });
     }
   }, {
-    key: "move",
-    value: function move(vector) {
-      var _this = this;
-
-      var dx = vector[0];
-      var dy = vector[1];
-
-      var enumerator = void 0;
-      if (dx === 1) {
-        // if down, it should iterate backwards
-        enumerator = this.eachPosDown.bind(this);
-      } else if (dy === 1) {
-        // if right, it should iterate rows backwards
-        enumerator = this.eachPosRight.bind(this);
-      } else {
-        // if up or left, normal iteration
-        enumerator = this.eachPos.bind(this);
-      }
-
-      var movePoints = 0;
-
-      enumerator(function (tile) {
+    key: 'resetMergedTiles',
+    value: function resetMergedTiles() {
+      this.eachPos(function (tile) {
         if (tile) {
           tile.merged = false;
         }
       });
+    }
+  }, {
+    key: 'resetMovePoints',
+    value: function resetMovePoints() {
+      this.movePoints = 0;
+    }
+  }, {
+    key: 'determineEnumerator',
+    value: function determineEnumerator(dir) {
+      var enumerator = void 0;
+
+      if (dir === 'down') {
+        enumerator = this.eachPosDown.bind(this);
+      } else if (dir === 'right') {
+        enumerator = this.eachPosRight.bind(this);
+      } else {
+        enumerator = this.eachPos.bind(this);
+      }
+
+      return enumerator;
+    }
+  }, {
+    key: 'move',
+    value: function move(dir) {
+      var _this = this;
+
+      this.resetMovePoints();
+      this.resetMergedTiles();
+      var vector = this.vectors[dir];
+
+      var dx = vector[0];
+      var dy = vector[1];
+      var enumerator = this.determineEnumerator(dir);
 
       enumerator(function (tile) {
         if (tile) {
           while (_this.inBounds([tile.row + dx, tile.col + dy])) {
+            // move only in bounds
             if (_this.empty([tile.row + dx, tile.col + dy])) {
+              // move tile into empty space
               _this.grid[tile.row][tile.col] = null;
               tile.updatePos([tile.row + dx, tile.col + dy]);
-              _this.grid[tile.row][tile.col] = tile;
+              _this.setTile(tile);
             } else if (_this.equalValue([tile.row + dx, tile.col + dy], tile) && !_this.grid[tile.row + dx][tile.col + dy].merged) {
+              // merge tiles
               _this.grid[tile.row][tile.col] = null;
               tile.updatePos([tile.row + dx, tile.col + dy]);
               tile.updateVal(tile.value * 2);
               tile.merged = true;
-              movePoints += tile.value;
-              _this.grid[tile.row][tile.col] = tile;
+              _this.movePoints += tile.value;
+              _this.setTile(tile);
               break;
             } else {
               break;
@@ -11994,10 +12014,9 @@ var Grid = function () {
           }
         }
       });
-      return movePoints;
     }
   }, {
-    key: "availableMerges",
+    key: 'availableMerges',
     value: function availableMerges() {
       var _this2 = this;
 
@@ -12010,17 +12029,15 @@ var Grid = function () {
       return availableMerges;
     }
   }, {
-    key: "neighboringMerge",
+    key: 'neighboringMerge',
     value: function neighboringMerge(tile) {
       var _this3 = this;
 
       var neighboringMerge = false;
 
-      var deltas = [[-1, 0], [1, 0], [0, -1], [0, 1]];
-
-      deltas.forEach(function (delta) {
-        var dx = delta[0];
-        var dy = delta[1];
+      Object.values(this.vectors).forEach(function (vector) {
+        var dx = vector[0];
+        var dy = vector[1];
 
         if (_this3.inBounds([tile.row + dx, tile.col + dy])) {
           var neighboringTile = _this3.grid[tile.row + dx][tile.col + dy];

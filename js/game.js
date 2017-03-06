@@ -29,20 +29,16 @@ class Game {
   }
 
   move(dir) {
-    const vector = this.vector(dir);
-    this.score += this.grid.move(vector);
+    this.grid.move(dir);
+    this.updateScore();
     this.placeRandomTile();
   }
 
-  vector(dir) {
-    const VECTORS = {
-      'up': [-1, 0],
-      'down': [1, 0],
-      'left': [0, -1],
-      'right': [0, 1]
+  updateScore() {
+    this.score += this.grid.movePoints;
+    if (this.score > this.bestScore) {
+      this.bestScore = this.score;
     }
-
-    return VECTORS[dir];
   }
 
   over() {
