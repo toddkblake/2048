@@ -5,6 +5,7 @@ import GameOverModal from './components/modal';
 import Header from './components/header';
 import Tiles from './components/tiles';
 import Game from './game';
+import bindInputEvents from './input';
 
 document.addEventListener('DOMContentLoaded', () => {
   const game = document.getElementById('game');
@@ -31,30 +32,9 @@ class GameContainer extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', event => {
-      switch (event.key) {
-        case 'ArrowUp': {
-          event.preventDefault();
-          this.state.game.move('up');
-          break;
-        }
-        case 'ArrowDown': {
-          event.preventDefault();
-          this.state.game.move('down');
-          break;
-        }
-        case 'ArrowLeft': {
-          event.preventDefault();
-          this.state.game.move('left');
-          break;
-        }
-        case 'ArrowRight': {
-          event.preventDefault();
-          this.state.game.move('right');
-          break;
-        }
-      }
-      this.updateGame(this.state.game);
+    bindInputEvents({
+      game: this.state.game,
+      updateGame: () => this.updateGame(this.state.game)
     });
   }
 
