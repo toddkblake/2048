@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from 'react-modal';
+import GameOverModal from './components/modal';
 import Header from './components/header';
 import Tiles from './components/tiles';
 import Game from './game';
@@ -82,29 +83,11 @@ class GameContainer extends React.Component {
   render () {
     return (
       <div className="game-container">
-        <Modal
-          isOpen={ this.state.modalIsOpen }
-          contentLabel="Modal"
-          className="modal-content"
-          overlayClassName="modal-overlay"
-          parentSelector={ this.getParent }
-        >
-          <h1>Game over!</h1>
-          <button onClick={ this.resetGame.bind(this) }>Try again</button>
-          <nav>
-            <ul className="links">
-              <li>
-                <a href="https://github.com/toddkblake/"><i className="fa fa-github fa-2x" aria-hidden="true"></i></a>
-              </li>
-              <li>
-                <a href="https://www.linkedin.com/in/toddkblake/"><i className="fa fa-linkedin fa-2x" aria-hidden="true"></i></a>
-              </li>
-              <li>
-                <a href="http://toddkblake.com/"><i className="fa fa-folder-o fa-2x" aria-hidden="true"></i></a>
-              </li>
-            </ul>
-          </nav>
-        </Modal>
+        <GameOverModal
+        isOpen={ this.state.modalIsOpen }
+        parentSelector={ this.getParent }
+        resetGame={ this.resetGame.bind(this) }
+        />
         <Header game={ this.state.game } resetGame={ this.resetGame.bind(this) } />
         <Tiles game={ this.state.game } />
       </div>
