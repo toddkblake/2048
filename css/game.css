@@ -29,7 +29,7 @@ h1, h2, h3, h4, h5, h6, p, a, input {
 
 .main-content {
   width: 500px;
-  margin: 90px auto;
+  margin: 0 auto;
 }
 
 body {
@@ -94,6 +94,26 @@ header .score-row {
   float: right;
 }
 
+.page-header {
+  position: relative;
+  padding-bottom: 90px;
+}
+
+nav.links {
+  position: absolute;
+  top: 15px;
+  left: 0;
+  display: flex;
+}
+
+nav.links a {
+  padding: 10px;
+}
+
+nav.links i {
+  transform: scale(1.5, 1.5);
+}
+
 .score-row li {
   padding: 5px 15px;
   border-radius: 3px;
@@ -108,10 +128,6 @@ header .score-row {
 
 .best {
   float: right;
-}
-
-header .bottom-row {
-
 }
 
 .bottom-row p {
@@ -230,7 +246,7 @@ footer nav a:last-child {
 .color-mode {
   position: absolute;
   top: 15px;
-  right: 15px;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -314,7 +330,8 @@ input:checked + .slider:before {
 .dark h1,
 .dark p ,
 .dark a,
-.dark strong {
+.dark strong,
+.dark i {
   color: #BDC3C7;
 }
 
