@@ -12546,6 +12546,10 @@ var InputHandler = function () {
         startY = touchObj.pageY;
       });
 
+      grid.addEventListener('touchmove', function (event) {
+        event.preventDefault();
+      }, { passive: false });
+
       grid.addEventListener('touchend', function (event) {
         var touchObj = event.changedTouches[0];
         endX = touchObj.pageX;
@@ -12609,6 +12613,11 @@ var InputHandler = function () {
     value: function right() {
       this.game.move('right');
       this.updateGame();
+    }
+  }, {
+    key: 'update',
+    value: function update(game) {
+      this.game = game;
     }
   }]);
 
@@ -26059,7 +26068,7 @@ var GameContainer = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      new _input2.default({
+      this.inputHandler = new _input2.default({
         game: this.state.game,
         updateGame: function updateGame() {
           return _this2.updateGame(_this2.state.game);
@@ -26085,6 +26094,7 @@ var GameContainer = function (_React$Component) {
         game = new _game2.default(this.state.game.bestScore);
       }
       this.setState({ game: game, modalIsOpen: false });
+      this.inputHandler.update(game);
     }
   }, {
     key: 'getParent',

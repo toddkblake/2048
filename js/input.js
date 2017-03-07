@@ -45,7 +45,11 @@ class InputHandler {
       let touchObj = event.changedTouches[0];
       startX = touchObj.pageX;
       startY = touchObj.pageY;
-    })
+    });
+
+    grid.addEventListener('touchmove', event => {
+      event.preventDefault()
+    }, { passive: false });
 
     grid.addEventListener('touchend', event => {
       let touchObj = event.changedTouches[0];
@@ -55,7 +59,7 @@ class InputHandler {
       let dx = endX - startX;
       let dy = endY - startY;
 
-      if (Math.abs(dx) > 50 || Math.abs(dy) > 50) {
+      if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
         this.handleSwipe(dx, dy);
       }
     });
@@ -103,6 +107,10 @@ class InputHandler {
   right() {
     this.game.move('right');
     this.updateGame();
+  }
+
+  update(game) {
+    this.game = game;
   }
 }
 

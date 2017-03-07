@@ -32,7 +32,7 @@ class GameContainer extends React.Component {
   }
 
   componentDidMount() {
-    new InputHandler({
+    this.inputHandler = new InputHandler({
       game: this.state.game,
       updateGame: () => this.updateGame(this.state.game)
     });
@@ -54,6 +54,7 @@ class GameContainer extends React.Component {
       game = new Game(this.state.game.bestScore);
     }
     this.setState({ game, modalIsOpen: false });
+    this.inputHandler.update(game);
   }
 
   getParent () {
