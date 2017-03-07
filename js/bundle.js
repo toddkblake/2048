@@ -12722,6 +12722,11 @@ var Grid = function () {
       this.grid[tile.row][tile.col] = tile;
     }
   }, {
+    key: 'removeTile',
+    value: function removeTile(tile) {
+      this.grid[tile.row][tile.col] = null;
+    }
+  }, {
     key: 'eachPos',
     value: function eachPos(callback) {
       this.grid.forEach(function (row, x) {
@@ -12859,20 +12864,23 @@ var Grid = function () {
       enumerator(function (tile) {
         if (tile) {
           while (_this.inBounds([tile.row + dx, tile.col + dy])) {
-            // move only in bounds
+
             if (_this.empty([tile.row + dx, tile.col + dy])) {
+
               // move tile into empty space
-              _this.grid[tile.row][tile.col] = null;
+              _this.removeTile(tile);
               tile.updatePos([tile.row + dx, tile.col + dy]);
               _this.setTile(tile);
             } else if (_this.equalValue([tile.row + dx, tile.col + dy], tile) && !_this.grid[tile.row + dx][tile.col + dy].merged) {
+
               // merge tiles
-              _this.grid[tile.row][tile.col] = null;
+              tile.merged = true;
+              _this.removeTile(tile);
               tile.updatePos([tile.row + dx, tile.col + dy]);
               tile.updateVal(tile.value * 2);
-              tile.merged = true;
-              _this.movePoints += tile.value;
               _this.setTile(tile);
+              _this.movePoints += tile.value;
+
               break;
             } else {
               break;

@@ -33,6 +33,10 @@ class Grid {
     this.grid[tile.row][tile.col] = tile;
   }
 
+  removeTile(tile) {
+    this.grid[tile.row][tile.col] = null;
+  }
+
   eachPos(callback) {
     this.grid.forEach((row, x) => {
       row.forEach((tile, y) => {
@@ -151,21 +155,25 @@ class Grid {
     enumerator((tile) => {
       if (tile) {
         while(this.inBounds([tile.row + dx, tile.col + dy])) {
-          // move only in bounds
+
           if (this.empty([tile.row + dx, tile.col + dy])) {
+
             // move tile into empty space
-            this.grid[tile.row][tile.col] = null;
+            this.removeTile(tile);
             tile.updatePos([tile.row + dx, tile.col + dy]);
             this.setTile(tile);
+
           } else if (this.equalValue([tile.row + dx, tile.col + dy], tile)
             && !this.grid[tile.row + dx][tile.col + dy].merged) {
+
             // merge tiles
-            this.grid[tile.row][tile.col] = null;
+            tile.merged = true;
+            this.removeTile(tile);
             tile.updatePos([tile.row + dx, tile.col + dy]);
             tile.updateVal(tile.value * 2);
-            tile.merged = true;
-            this.movePoints += tile.value;
             this.setTile(tile);
+            this.movePoints += tile.value;
+
             break;
           } else {
             break;
