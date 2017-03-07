@@ -45,7 +45,7 @@ From tiles merging together to new ones appearing, 2048 utilizes CSS transitions
 /* ANIMATIONS */
 
 .merged {
-  animation: merge 0.2s linear;
+  animation: merge 100ms linear;
 }
 
 @-webkit-keyframes merge {

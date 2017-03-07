@@ -12354,7 +12354,7 @@ var Tiles = function (_React$Component) {
             transitionEnterTimeout: 100,
             transitionLeaveTimeout: 100
           },
-          game.grid.tiles().map(function (tile, idx) {
+          game.grid.sortedTiles().map(function (tile, idx) {
             return _react2.default.createElement(_tile2.default, { tile: tile, key: tile.id });
           })
         )
@@ -12762,15 +12762,27 @@ var Grid = function () {
       });
     }
   }, {
-    key: 'tiles',
-    value: function tiles() {
+    key: 'sortedTiles',
+    value: function sortedTiles() {
       var tiles = [];
       this.eachPos(function (tile) {
         if (tile) {
           tiles.push(tile);
         }
       });
+      tiles.sort(this.sortByTileId);
       return tiles;
+    }
+  }, {
+    key: 'sortByTileId',
+    value: function sortByTileId(tileA, tileB) {
+      if (tileA.id < tileB.id) {
+        return -1;
+      } else if (tileA.id > tileB.id) {
+        return 1;
+      } else {
+        return 0;
+      }
     }
   }, {
     key: 'emptyPositions',

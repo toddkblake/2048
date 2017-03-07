@@ -17,7 +17,7 @@ class Tiles extends React.Component {
           transitionLeaveTimeout={100}
         >
           {
-            game.grid.tiles().map((tile, idx) => <Tile tile={ tile } key={ tile.id } />)
+            game.grid.sortedTiles().map((tile, idx) => <Tile tile={ tile } key={ tile.id } />)
           }
         </ReactCSSTransitionGroup>
       </div>

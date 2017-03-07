@@ -8,7 +8,7 @@
   margin-right: 15px;
   border-radius: 3px;
   text-align: center;
-  transition: all 0.1s ease;
+  transition: all 100ms ease;
 }
 
 .tile > span {
@@ -168,7 +168,7 @@
 
 .tile-enter.tile-active {
   transform: scale(1, 1);
-  transition: transform 0.1s ease-in;
+  transition: transform 100ms ease-in;
 }
 
 .tile-leave {
@@ -182,7 +182,7 @@
 /* ANIMATIONS */
 
 .merged {
-  animation: merge 0.2s linear;
+  animation: merge 100ms linear;
 }
 
 @-webkit-keyframes merge {

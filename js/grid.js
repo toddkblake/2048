@@ -66,14 +66,25 @@ class Grid {
     });
   }
 
-  tiles() {
+  sortedTiles() {
     const tiles = [];
     this.eachPos((tile) => {
       if (tile) {
         tiles.push(tile);
       }
     });
+    tiles.sort(this.sortByTileId);
     return tiles;
+  }
+
+  sortByTileId(tileA, tileB) {
+    if (tileA.id < tileB.id) {
+      return -1;
+    } else if (tileA.id > tileB.id) {
+      return 1;
+    } else {
+      return 0;
+    }
   }
 
   emptyPositions() {
