@@ -12548,6 +12548,7 @@ var InputHandler = function () {
 
       grid.addEventListener('touchmove', function (event) {
         event.preventDefault();
+        event.stopPropagation();
       }, { passive: false });
 
       grid.addEventListener('touchend', function (event) {
@@ -12558,7 +12559,7 @@ var InputHandler = function () {
         var dx = endX - startX;
         var dy = endY - startY;
 
-        if (Math.abs(dx) > 50 || Math.abs(dy) > 50) {
+        if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
           _this2.handleSwipe(dx, dy);
         }
       });

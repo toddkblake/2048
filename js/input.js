@@ -48,7 +48,8 @@ class InputHandler {
     });
 
     grid.addEventListener('touchmove', event => {
-      event.preventDefault()
+      event.preventDefault();
+      event.stopPropagation();
     }, { passive: false });
 
     grid.addEventListener('touchend', event => {
