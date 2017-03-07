@@ -12538,9 +12538,7 @@ var InputHandler = function () {
       var endX = void 0;
       var endY = void 0;
 
-      var grid = document.getElementById('grid');
-
-      grid.addEventListener('touchstart', function (event) {
+      document.addEventListener('touchstart', function (event) {
         var touchObj = event.changedTouches[0];
         startX = touchObj.pageX;
         startY = touchObj.pageY;
@@ -12551,7 +12549,7 @@ var InputHandler = function () {
         event.stopPropagation();
       }, { passive: false });
 
-      grid.addEventListener('touchend', function (event) {
+      document.addEventListener('touchend', function (event) {
         var touchObj = event.changedTouches[0];
         endX = touchObj.pageX;
         endY = touchObj.pageY;

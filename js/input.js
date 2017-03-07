@@ -39,9 +39,7 @@ class InputHandler {
     let endX;
     let endY;
 
-    const grid = document.getElementById('grid');
-
-    grid.addEventListener('touchstart', event => {
+    document.addEventListener('touchstart', event => {
       let touchObj = event.changedTouches[0];
       startX = touchObj.pageX;
       startY = touchObj.pageY;
@@ -52,7 +50,7 @@ class InputHandler {
       event.stopPropagation();
     }, { passive: false });
 
-    grid.addEventListener('touchend', event => {
+    document.addEventListener('touchend', event => {
       let touchObj = event.changedTouches[0];
       endX = touchObj.pageX;
       endY = touchObj.pageY;
