@@ -129,6 +129,7 @@ header .bottom-row {
   padding: 15px;
   background-color: #BBADA0;
   border-radius: 5px;
+  touch-action: none;
 }
 
 #grid .row {

@@ -12476,42 +12476,146 @@ exports.default = Game;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var bindInputEvents = function bindInputEvents(_ref) {
-  var game = _ref.game,
-      updateGame = _ref.updateGame;
 
-  document.addEventListener('keydown', function (event) {
-    switch (event.key) {
-      case 'ArrowUp':
-        {
-          event.preventDefault();
-          game.move('up');
-          break;
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var InputHandler = function () {
+  function InputHandler(_ref) {
+    var game = _ref.game,
+        updateGame = _ref.updateGame;
+
+    _classCallCheck(this, InputHandler);
+
+    this.game = game;
+    this.updateGame = updateGame;
+    this.bindKeyEvents();
+    this.bindTouchEvents();
+  }
+
+  _createClass(InputHandler, [{
+    key: 'bindKeyEvents',
+    value: function bindKeyEvents() {
+      var _this = this;
+
+      document.addEventListener('keydown', function (event) {
+        switch (event.key) {
+          case 'ArrowUp':
+            {
+              event.preventDefault();
+              _this.up();
+              break;
+            }
+          case 'ArrowDown':
+            {
+              event.preventDefault();
+              _this.down();
+              break;
+            }
+          case 'ArrowLeft':
+            {
+              event.preventDefault();
+              _this.left();
+              break;
+            }
+          case 'ArrowRight':
+            {
+              event.preventDefault();
+              _this.right();
+              break;
+            }
         }
-      case 'ArrowDown':
-        {
-          event.preventDefault();
-          game.move('down');
-          break;
-        }
-      case 'ArrowLeft':
-        {
-          event.preventDefault();
-          game.move('left');
-          break;
-        }
-      case 'ArrowRight':
-        {
-          event.preventDefault();
-          game.move('right');
-          break;
-        }
+      });
     }
-    updateGame();
-  });
-};
+  }, {
+    key: 'bindTouchEvents',
+    value: function bindTouchEvents(game, updateGame) {
+      var _this2 = this;
 
-exports.default = bindInputEvents;
+      var startX = void 0;
+      var startY = void 0;
+      var endX = void 0;
+      var endY = void 0;
+
+      var grid = document.getElementById('grid');
+
+      grid.addEventListener('touchstart', function (event) {
+        var touchObj = event.changedTouches[0];
+        startX = touchObj.pageX;
+        startY = touchObj.pageY;
+      });
+
+      grid.addEventListener('touchend', function (event) {
+        var touchObj = event.changedTouches[0];
+        endX = touchObj.pageX;
+        endY = touchObj.pageY;
+
+        var dx = endX - startX;
+        var dy = endY - startY;
+
+        if (Math.abs(dx) > 50 || Math.abs(dy) > 50) {
+          _this2.handleSwipe(dx, dy);
+        }
+      });
+    }
+  }, {
+    key: 'handleSwipe',
+    value: function handleSwipe(dx, dy) {
+      if (Math.abs(dx) > Math.abs(dy)) {
+        this.handleHorizontalSwipe(dx);
+      } else {
+        this.handleVerticalSwipe(dy);
+      }
+    }
+  }, {
+    key: 'handleHorizontalSwipe',
+    value: function handleHorizontalSwipe(dx) {
+      if (dx > 0) {
+        this.right();
+      } else {
+        this.left();
+      }
+    }
+  }, {
+    key: 'handleVerticalSwipe',
+    value: function handleVerticalSwipe(dy) {
+      if (dy > 0) {
+        this.down();
+      } else {
+        this.up();
+      }
+    }
+  }, {
+    key: 'up',
+    value: function up() {
+      this.game.move('up');
+      this.updateGame();
+    }
+  }, {
+    key: 'down',
+    value: function down() {
+      this.game.move('down');
+      this.updateGame();
+    }
+  }, {
+    key: 'left',
+    value: function left() {
+      this.game.move('left');
+      this.updateGame();
+    }
+  }, {
+    key: 'right',
+    value: function right() {
+      this.game.move('right');
+      this.updateGame();
+    }
+  }]);
+
+  return InputHandler;
+}();
+
+exports.default = InputHandler;
 
 /***/ }),
 /* 99 */
@@ -25955,7 +26059,7 @@ var GameContainer = function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      (0, _input2.default)({
+      new _input2.default({
         game: this.state.game,
         updateGame: function updateGame() {
           return _this2.updateGame(_this2.state.game);

@@ -5,7 +5,7 @@ import GameOverModal from './components/modal';
 import Header from './components/header';
 import Tiles from './components/tiles';
 import Game from './game';
-import bindInputEvents from './input';
+import InputHandler from './input';
 
 document.addEventListener('DOMContentLoaded', () => {
   const game = document.getElementById('game');
@@ -32,7 +32,7 @@ class GameContainer extends React.Component {
   }
 
   componentDidMount() {
-    bindInputEvents({
+    new InputHandler({
       game: this.state.game,
       updateGame: () => this.updateGame(this.state.game)
     });
