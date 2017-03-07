@@ -12541,10 +12541,12 @@ var InputHandler = function () {
       var grid = document.getElementById('grid');
 
       grid.addEventListener('touchstart', function (event) {
+        event.preventDefault();
+        event.stopPropagation();
         var touchObj = event.changedTouches[0];
         startX = touchObj.pageX;
         startY = touchObj.pageY;
-      });
+      }, { passive: false });
 
       grid.addEventListener('touchmove', function (event) {
         event.preventDefault();
@@ -12559,7 +12561,7 @@ var InputHandler = function () {
         var dx = endX - startX;
         var dy = endY - startY;
 
-        if (Math.abs(dx) > 30 || Math.abs(dy) > 30) {
+        if (Math.abs(dx) > 25 || Math.abs(dy) > 25) {
           _this2.handleSwipe(dx, dy);
         }
       });

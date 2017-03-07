@@ -32,13 +32,17 @@ h1, h2, h3, h4, h5, h6, p, a, input {
   margin: 90px auto;
 }
 
+html, body {
+  overflow-y: hidden;
+}
+
 body {
   color: #776E65;
   background-color: #FAF8EF;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.05em;
   font-weight: 400;
-  touch-action: none;
+  position: relative;
 }
 
 p {
@@ -130,6 +134,7 @@ header .bottom-row {
   padding: 15px;
   background-color: #BBADA0;
   border-radius: 5px;
+  touch-action: none;
 }
 
 #grid .row {
