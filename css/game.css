@@ -38,6 +38,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1.05em;
   font-weight: 400;
+  touch-action: none;
 }
 
 p {
