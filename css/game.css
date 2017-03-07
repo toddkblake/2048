@@ -32,17 +32,12 @@ h1, h2, h3, h4, h5, h6, p, a, input {
   margin: 90px auto;
 }
 
-html, body {
-  overflow-y: hidden;
-}
-
 body {
   color: #776E65;
   background-color: #FAF8EF;
   font-family: 'Open Sans', sans-serif;
   font-size: 1.05em;
   font-weight: 400;
-  position: relative;
 }
 
 p {

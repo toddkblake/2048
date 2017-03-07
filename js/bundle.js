@@ -12541,14 +12541,12 @@ var InputHandler = function () {
       var grid = document.getElementById('grid');
 
       grid.addEventListener('touchstart', function (event) {
-        event.preventDefault();
-        event.stopPropagation();
         var touchObj = event.changedTouches[0];
         startX = touchObj.pageX;
         startY = touchObj.pageY;
-      }, { passive: false });
+      });
 
-      grid.addEventListener('touchmove', function (event) {
+      document.addEventListener('touchmove', function (event) {
         event.preventDefault();
         event.stopPropagation();
       }, { passive: false });

@@ -42,14 +42,12 @@ class InputHandler {
     const grid = document.getElementById('grid');
 
     grid.addEventListener('touchstart', event => {
-      event.preventDefault();
-      event.stopPropagation();
       let touchObj = event.changedTouches[0];
       startX = touchObj.pageX;
       startY = touchObj.pageY;
-    }, { passive: false });
+    });
 
-    grid.addEventListener('touchmove', event => {
+    document.addEventListener('touchmove', event => {
       event.preventDefault();
       event.stopPropagation();
     }, { passive: false });
