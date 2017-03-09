@@ -210,7 +210,7 @@ footer nav a:last-child {
 
 /* MOVE POINTS */
 
-.move-points {
+#move-points {
   position: absolute;
   background: transparent;
   z-index: 1000;
@@ -219,22 +219,28 @@ footer nav a:last-child {
   top: 0;
   left: 0;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#move-points.fade {
   animation: fadepoints 500ms linear;
   animation-fill-mode: forwards;
 }
 
-.move-points h2 {
+#move-points h2 {
   color: #776E65;
 }
 
 @keyframes fadepoints {
   0%: { top: 0; opacity: 1; }
-  100% { top: -50%; opacity: 0; }
+  100% { top: -100%; opacity: 0; }
 }
 
 @-webkit-keyframes fadepoints {
   0%: { top: 0; opacity: 1; }
-  100% { top: -50%; opacity: 0; }
+  100% { top: -100%; opacity: 0; }
 }
 
 /* MODAL */
@@ -410,6 +416,6 @@ input:checked + .slider:before {
   background: rgba(32, 34, 34, 0.75);
 }
 
-.dark .move-points h2 {
+.dark #move-points h2 {
   color: #BDC3C7;
 }

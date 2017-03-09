@@ -1,15 +1,7 @@
 import React from 'react';
-
+import MovePoints from './move-points';
+;
 const Header = ({ resetGame, game }) => {
-  debugger
-  let movePoints;
-  if (game.movePoints > 0) {
-    movePoints = (
-      <div className="move-points">
-        <h2>{ game.movePoints }+</h2>
-      </div>
-    )
-  }
   return (
     <header>
       <section className="top-row group">
@@ -18,7 +10,7 @@ const Header = ({ resetGame, game }) => {
           <li className="score">
             <h3>Score</h3>
             <h2 className="current-score">{ game.score }</h2>
-            { movePoints }
+            <MovePoints game={ game }/>
           </li>
           <li className="best">
             <h3>Best</h3>
