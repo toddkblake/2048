@@ -12145,6 +12145,20 @@ var Header = function Header(_ref) {
   var resetGame = _ref.resetGame,
       game = _ref.game;
 
+  debugger;
+  var movePoints = void 0;
+  if (game.movePoints > 0) {
+    movePoints = _react2.default.createElement(
+      "div",
+      { className: "move-points" },
+      _react2.default.createElement(
+        "h2",
+        null,
+        game.movePoints,
+        "+"
+      )
+    );
+  }
   return _react2.default.createElement(
     "header",
     null,
@@ -12171,7 +12185,8 @@ var Header = function Header(_ref) {
             "h2",
             { className: "current-score" },
             game.score
-          )
+          ),
+          movePoints
         ),
         _react2.default.createElement(
           "li",
@@ -12398,6 +12413,7 @@ var Game = function () {
 
     this.score = 0;
     this.bestScore = bestScore;
+    this.movePoints = 0;
     this.grid = new _grid2.default();
     this.newGame();
   }
@@ -12434,7 +12450,8 @@ var Game = function () {
   }, {
     key: 'updateScore',
     value: function updateScore() {
-      this.score += this.grid.movePoints;
+      this.movePoints = this.grid.movePoints;
+      this.score += this.movePoints;
       if (this.score > this.bestScore) {
         this.bestScore = this.score;
       }

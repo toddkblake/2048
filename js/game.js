@@ -5,6 +5,7 @@ class Game {
   constructor(bestScore) {
     this.score = 0;
     this.bestScore = bestScore;
+    this.movePoints= 0
     this.grid = new Grid;
     this.newGame();
   }
@@ -35,7 +36,8 @@ class Game {
   }
 
   updateScore() {
-    this.score += this.grid.movePoints;
+    this.movePoints = this.grid.movePoints
+    this.score += this.movePoints;
     if (this.score > this.bestScore) {
       this.bestScore = this.score;
     }

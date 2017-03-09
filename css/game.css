@@ -124,6 +124,7 @@ nav.links i {
 .score {
   float: left;
   margin-right: 5px;
+  position: relative;
 }
 
 .best {
@@ -205,6 +206,35 @@ footer nav a {
 
 footer nav a:last-child {
   margin-right: 0;
+}
+
+/* MOVE POINTS */
+
+.move-points {
+  position: absolute;
+  background: transparent;
+  z-index: 1000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  animation: fadepoints 500ms linear;
+  animation-fill-mode: forwards;
+}
+
+.move-points h2 {
+  color: #776E65;
+}
+
+@keyframes fadepoints {
+  0%: { top: 0; opacity: 1; }
+  100% { top: -50%; opacity: 0; }
+}
+
+@-webkit-keyframes fadepoints {
+  0%: { top: 0; opacity: 1; }
+  100% { top: -50%; opacity: 0; }
 }
 
 /* MODAL */
@@ -378,4 +408,8 @@ input:checked + .slider:before {
 
 .dark .modal-overlay {
   background: rgba(32, 34, 34, 0.75);
+}
+
+.dark .move-points h2 {
+  color: #BDC3C7;
 }
