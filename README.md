@@ -33,7 +33,7 @@ const Tile = ({ tile }) => {
 ```
 
 ## User Interface (UI) and User Experience (UX)
-Part of what makes 2048 so addicting is it's incredibly interactive UI/UX. In order to slide tiles up, down, left or right, the user simply presses the corresponding arrow key.
+Part of what makes 2048 so addicting is it's incredibly interactive UI/UX. In order to slide tiles up, down, left or right, the user simply presses the corresponding arrow key, or swipes in the corresponding direction on mobile.
 
 ![gameplay gif](docs/gameplay.gif)
 
@@ -61,6 +61,43 @@ From tiles merging together to new ones appearing, 2048 utilizes CSS transitions
 }
 ```
 
+### Touch swiping gestures
+
+In order for mobile users to be able to play, 2048 implements touch event handlers to track whether a mobile users swipes up, down, left or right. Both touch and keydown events are bound in an `InputHandler` class that calls relevant methods to update the game state.
+
+```javascript
+bindTouchEvents(game, updateGame) {
+  let startX;
+  let startY;
+  let endX;
+  let endY;
+
+  document.addEventListener('touchstart', event => {
+    let touchObj = event.changedTouches[0];
+    startX = touchObj.pageX;
+    startY = touchObj.pageY;
+  });
+
+  document.addEventListener('touchmove', event => {
+    event.preventDefault();
+    event.stopPropagation();
+  }, { passive: false });
+
+  document.addEventListener('touchend', event => {
+    let touchObj = event.changedTouches[0];
+    endX = touchObj.pageX;
+    endY = touchObj.pageY;
+
+    let dx = endX - startX;
+    let dy = endY - startY;
+
+    if (Math.abs(dx) > 25 || Math.abs(dy) > 25) {
+      this.handleSwipe(dx, dy);
+    }
+  });
+}
+```
+
 ### Color Mode
 
 For even more beautiful gameplay, 2048 includes a dark mode that allows users to switch the UI color scheme dynamically during game play using a toggle switch.
@@ -70,15 +107,3 @@ For even more beautiful gameplay, 2048 includes a dark mode that allows users to
 
 #### Dark Mode
 ![dark screenshot](docs/dark.png)
-
-## Future Directions for the Project
-
-I plan to continue working on this project, aiming to make the game more accessible on mobile devices.
-
-### Touch swiping gestures
-
-In order for mobile users to be able to play 2048, I plan to implement event handlers for touch events that would allows for mobile users to swipe up, down, left or right to play 2048.
-
-### Responsive design
-
-In addition to adding touch gestures, I plan to make a mobile responsive design for screens below 500px width.
