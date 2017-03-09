@@ -40,7 +40,10 @@ class GameContainer extends React.Component {
 
   updateGame(game) {
     if (game.over()) {
-      this.setState({ modalIsOpen: true });
+      this.setState({ game });
+      setTimeout(() => {
+        this.setState({ modalIsOpen: true });
+      }, 501);
     } else {
       this.setState({ game });
     }

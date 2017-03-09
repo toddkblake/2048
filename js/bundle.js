@@ -26182,8 +26182,13 @@ var GameContainer = function (_React$Component) {
   }, {
     key: 'updateGame',
     value: function updateGame(game) {
+      var _this3 = this;
+
       if (game.over()) {
-        this.setState({ modalIsOpen: true });
+        this.setState({ game: game });
+        setTimeout(function () {
+          _this3.setState({ modalIsOpen: true });
+        }, 501);
       } else {
         this.setState({ game: game });
       }
