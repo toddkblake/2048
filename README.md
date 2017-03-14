@@ -1,7 +1,6 @@
 # 2048
 
-[Play][play]
-[play]: http://toddkblake.com/2048
+[Play](http://toddkblake.com/2048)
 
 2048 is a sliding-block puzzle game inspired by the original 2048 by Gabrielle Cirulli.
 
@@ -35,7 +34,7 @@ const Tile = ({ tile }) => {
 ## User Interface (UI) and User Experience (UX)
 Part of what makes 2048 so addicting is it's incredibly interactive UI/UX. In order to slide tiles up, down, left or right, the user simply presses the corresponding arrow key, or swipes in the corresponding direction on mobile.
 
-![gameplay gif](docs/gameplay.gif)
+![gameplay gif](/docs/gameplay.gif)
 
 ### CSS Transitions & Animations
 
